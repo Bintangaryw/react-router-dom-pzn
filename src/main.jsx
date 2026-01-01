@@ -1,10 +1,34 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import { BrowserRouter, Route, Routes } from "react-router";
+import Home from "./Home.jsx";
+import About from "./About.jsx";
+import Seller from "./Seller.jsx";
+import Customer from "./Customer.jsx";
+import Data from "./Data.jsx";
+import DataLayout from "./DataLayout.jsx";
+import ProductDetail from "./ProductDetail.jsx";
+import Image from "./Image.jsx";
+import NotFound from "./NotFound.jsx";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+createRoot(document.getElementById("root")).render(
+    <StrictMode>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/data" element={<DataLayout />}>
+                    <Route index element={<Data />} />
+                    <Route path="seller" element={<Seller />} />
+                    <Route path="customer" element={<Customer />} />
+
+                    <Route path="product/:id" element={<ProductDetail />} />
+                </Route>
+                <Route path="/images/*" element={<Image />} />
+                <Route path="/*" element={<NotFound />} />
+            </Routes>
+        </BrowserRouter>
+    </StrictMode>
+);
